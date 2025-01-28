@@ -1,0 +1,20 @@
+{
+  "name": "SeedX",
+  "version": "1.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "electron-store": "^6.0.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . SeedX --platform=win32 --arch=ia32,x64 --out=dist --overwrite"
+  },
+  "keywords": [],
+  "author": "David",
+  "license": "ISC",
+  "description": "SeedX - software for finding forgotten Crypto wallets",
+  "devDependencies": {
+    "electron": "^32.0.2",
+    "electron-packager": "^17.1.2"
+  }
+}

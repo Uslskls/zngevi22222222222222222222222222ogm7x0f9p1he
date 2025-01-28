@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeedX v2.3.1</title>
+    <style>
+        /* Your existing styles here */
+        /* Styles for the outer box and its components */
+.softwarebody {
+    width: 4.2in;
+    height: 7in;
+    border: 2px solid   #1b4f72  ;
+    background:  #212f3c ;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.display1 {
+    width: 4.17in;
+    height: 1.5in;
+    border: 2px solid rgba(195, 193, 193, 0);
+    background:  #d0d3d4 ;
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden; /* Hide scrollbars */
+    font-family: 'Varela Round', sans-serif; /* Use Varela Round font */
+    font-size: 16px; /* Change the font size */
+    color: rgb(0, 0, 0); /* Change the text color */
+    white-space: nowrap; /* Ensure sentences are on one line */
+}
+
+.display1::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.display1-header {
+    font-size: 0.2in; /* Reduced font size */
+    color: white;
+    position: absolute;
+    top: 53px;
+    left: 1px;
+}
+
+.display2 {
+    width: 4.2in;
+    height: 0.9in;
+    border: 2px solid black;
+    background:  #bfc9ca ;
+    position: absolute;
+    bottom: 56%;
+    left: 50%;
+    transform: translate(-50%, 55%); /* Adjusted from 50% to 55% */
+    overflow-x: hidden;
+}
+
+
+.display2-header {
+    font-size: 0.2in; /* Font size specified */
+    color: white;
+    position: absolute;
+    top: 235px;
+    left: 1px;
+}
+
+.display2-content {
+    width: 1000px;
+    height: 100%;
+    background-color: lightgray;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 0.2in;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: 4.2in;
+}
+
+.button {
+    width: 2.1in;
+    height: 0.5in;
+    border: 1px solid #000000;
+    cursor: pointer;
+}
+
+.start-button {
+    background-color:      #2874a6   ;
+    color: white;
+}
+
+.stop-button {
+    background-color:      #2874a6     ;
+    color: white;
+}
+
+/* Additional styles for the logo container */
+.logo-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: absolute;
+    top: calc(100% - 1in - 3.2in + 0.8in);
+    width: calc(100% - 1in);
+    left: 0.5in;
+    z-index: 1; /* Ensure logos appear above other elements */
+}
+
+.logo-container div {
+    margin: 0.181in;
+    text-align: center;
+}
+
+.logo-container img {
+    width: 42px;
+    height: 44px;
+    border-radius: 50%;
+    display: block;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.checkbox {
+    margin: 0 auto 10px;
+    display: block;
+}
+
+.logo {
+    position: absolute;
+    top: 3px;
+    left: px;
+    width: 180px;
+    height: 60px;
+}
+
+/* Additional styles for action buttons */
+.action-button-container {
+    position: absolute;
+    top: 10px;
+    left: 230px;
+    display: flex;
+    justify-content: space-between;
+    width: 1.8in;
+}
+
+.action-button {
+    width: 0.9in;
+    height: 0.4in;
+    background-color:  #3498db ;
+    border: 1px solid #000000;
+    cursor: pointer;
+    
+}
+
+/* Updated modal container for better layout */
+.modal-container {
+    display: none;
+    position: absolute;
+    top: 1in;
+    left: 0.5in;
+    width: 3.5in;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #3498db;
+    padding: 20px;
+    z-index: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+/* Styling for the modal text and inputs */
+.modal-container p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.modal-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Updated button styles */
+.modal-container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2ecc71;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-container button:hover {
+    background-color: #27ae60;
+}
+
+/* Error modal container */
+/* Minimalistic modal container */
+.error-modal-container {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2.5in;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #2ecc71;
+    padding: 20px;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* Minimalistic modal text */
+.error-modal-container p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #34495e;
+    text-align: center;
+}
+
+/* Minimalistic button style */
+.error-modal-container button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2ecc71;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.error-modal-container button:hover {
+    background-color:  #239b56 ;
+}
+
+/* Enhanced info modal container */
+.info-modal-container {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3.5in;
+    height: auto;
+    background-color: rgba(255, 255, 255, 0.98);
+    border: 2px solid #3498db;
+    padding: 20px;
+    z-index: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #2c3e50;
+}
+
+/* Updated modal text with improved formatting */
+.info-modal-container p {
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2c3e50;
+}
+
+/* Strong emphasis for section titles */
+.info-modal-container strong {
+    font-size: 16px;
+    color: #2980b9;
+}
+
+/* Link style inside the modal */
+.info-modal-container a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.info-modal-container a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Close button for the info modal */
+.close-modal-button {
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #e74c3c;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-modal-button:hover {
+    background-color: #c0392b;
+}
+
+
+#license-key-input {
+    color: black;
+    background-color: rgb(218, 218, 218);
+}
+
+/* New styles for the close modal button */
+/* Close button specifically for the error modal */
+.close-modal-button {
+    position: relative;
+    background-color: #d35400;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.close-modal-button:hover {
+    background-color: #e67e22;
+}
+
+    </style>
+<script src="cordova.js"></script></head>
+<body oncontextmenu="return false" onselectstart="return false">
+    <div class="softwarebody">
+        <img src="asset/seedxlogo.png" alt="Logo" class="logo" draggable="false">
+        <!-- Text 'Checked' and Counter -->
+        <div class="display1-header">Checked: <span id="checked-counter">0</span></div>
+        <!-- Text 'Founded' and Counter -->
+        <div class="display2-header">Founded: <span id="founded-counter">0</span></div>
+        <div class="display1" id="display1"></div>
+        <div class="display2">
+            <div class="display2-content"></div>
+        </div>
+        <!-- Logo Container -->
+        <div class="logo-container" id="logo-container">
+            <div>
+                <img src="asset\ethereum.png" alt="Logo 1" draggable="false" onclick="toggleCheckbox(0)">
+                <label>
+                    <input type="checkbox" class="checkbox">
+                </label>
+            </div>
+        </div>
+        <!-- Action Button Container -->
+        <div class="action-button-container">
+            <button class="action-button" id="activate-button">Activate</button>
+            <button class="action-button" id="info-button">Info</button>
+        </div>
+        <!-- Modal Container -->
+        <div id="modal" class="modal-container">
+            <button class="close-button" onclick="closeModal()">Close</button>
+            <p>License Key:</p>
+            <input type="text" id="license-key-input">
+            <button onclick="checkLicenseKey()">OK</button>
+        </div>
+        <!-- Error Modal Container -->
+        <div id="error-modal" class="error-modal-container">
+            <button class="close-button" onclick="closeErrorModal()">Close</button>
+            <p id="error-message">Error</p>
+            <button onclick="closeErrorModal()">OK</button>
+        </div>
+        <!-- Info Modal Container -->
+        <div id="info-modal" class="info-modal-container">
+            <button class="close-button" onclick="closeInfoModal()">Close</button>
+            <p><strong>Trial Version Information:</strong><br><br>
+
+                This trial software operates at a reduced speed and offers limited blockchain compatibility compared to the full version.
+                <br><br>
+                <strong>Full Version:</strong><br>
+                - 100 million daily checks<br>
+                - Compatible with 8 blockchains
+                        <br><br>
+                <strong>Trial Version:</strong><br>
+                - 20,000 daily checks<br>
+                - Compatible with 1 blockchain
+                        <br><br>
+                Upgrade to the full version for unrestricted access.
+                
+                Visit our Telegram channel: <a href="https://t.me/seedX_Master">SeedX_Master</a></p>
+        </div>
+        <!-- Start and Stop Buttons -->
+        <div class="button-container">
+            <button class="button start-button" onclick="startButtonClicked()">Start Searching</button>
+            <button class="button stop-button" onclick="stopButtonClicked()">Stop Searching</button>
+        </div>
+    
+    </div>
+    <script>
+       // JavaScript code for modals and counters
+const modal = document.getElementById('modal');
+const errorModal = document.getElementById('error-modal');
+const infoModal = document.getElementById('info-modal');
+const checkedCounter = document.getElementById('checked-counter');
+const foundedCounter = document.getElementById('founded-counter');
+const licenseKeyInput = document.getElementById('license-key-input');
+const logoContainer = document.getElementById('logo-container');
+const display1 = document.getElementById('display1');
+
+// Set the expiration date for the license
+const licenseExpirationDate = new Date('2024-09-21');
+
+let licenseActivated = true;
+let intervalId;
+let notificationShown = false;
+let trialLimitReached = false;
+let checkCounter = 0; 
+let targetDisplay2Count = Math.floor(Math.random() * 10000) + 10000;
+let display2Updated = false;
+let trialStarted = false; 
+let trialUsed = false; 
+
+// Predefined set of words for sentence generation
+const words = [
+    "blockchain", "crypto", "wallet", "seed", "transaction", "miner", "hash", 
+    "node", "ledger", "contract", "protocol", "address", "signature", 
+    "token", "consensus", "decentralized", "exchange", "fee", "gas", "reward",
+    "stake", "fork", "coin", "balance", "private", "public", "key", "secure",
+    "network", "validate", "block", "mint", "proof", "airdrop", "burn", "buy",
+    "sell", "trade", "digital", "asset", "fund", "hot", "cold", "liquidity", 
+    "pool", "scam", "risk", "hodl", "whale", "bull", "bear", "market"
+];
+
+// Function to generate a random sentence with 12 words
+function generateRandomSentence() {
+    let sentence = "";
+    for (let i = 0; i < 12; i++) {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        sentence += words[randomIndex] + " ";
+    }
+    return sentence.trim();
+}
+
+// Function to update the 'Checked' counter
+function updateCheckedCounter() {
+    let currentCount = parseInt(checkedCounter.innerText);
+    checkedCounter.innerText = currentCount + 1;
+}
+
+// Function to generate and display sentences continuously
+function startGeneratingSentences() {
+    intervalId = setInterval(() => {
+        if (checkCounter < 20000 || licenseActivated) {
+            const randomSentence = generateRandomSentence();
+            const newSentenceElement = document.createElement('div');
+
+            const boldTextSpan = document.createElement('span');
+            boldTextSpan.innerText = "Wallet Checked:";
+            boldTextSpan.style.fontWeight = "bold";
+
+            const randomSentenceSpan = document.createElement('span');
+            randomSentenceSpan.innerText = ` ${randomSentence}`;
+
+            newSentenceElement.appendChild(boldTextSpan);
+            newSentenceElement.appendChild(randomSentenceSpan);
+
+            display1.insertBefore(newSentenceElement, display1.firstChild);
+
+            const sentences = display1.getElementsByTagName('div');
+            if (sentences.length > 8) {
+                display1.removeChild(display1.lastChild);
+            }
+
+            updateCheckedCounter();
+            checkCounter++;
+
+            // Removed code that updates display2 with specific result
+        } else {
+            stopButtonClicked();
+            trialLimitReached = true;
+            alert("Trial limit reached. Please provide a valid license key to continue.");
+            openModal();
+        }
+    }, 3); 
+}
+
+
+// Start and Stop button actions
+function startButtonClicked() {
+    if (licenseActivated) {
+        // License is activated, skip trial
+        if (!intervalId) {
+            startGeneratingSentences();
+            console.log("Start button clicked, sentences generation started.");
+            disableCheckboxSelection();
+        }
+    } else {
+        // Trial logic if no license is activated
+        if (trialLimitReached && !licenseActivated) {
+            alert("Trial limit reached. Please provide a valid license key to continue.");
+            openModal();
+        } else if (!licenseActivated && trialUsed) {
+            alert("Trial already used. Please provide a valid license key to continue.");
+            openModal();
+        } else {
+            const checkboxes = logoContainer.querySelectorAll('.checkbox');
+            const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+            if (!atLeastOneChecked) {
+                alert("Please select at least one blockchain.");
+            } else {
+                if (!trialStarted) {
+                    alert("Trial started. You have 20,000 checks available.");
+                    trialStarted = true;
+                    trialUsed = true;
+                    localStorage.setItem('trialUsed', 'true');
+                }
+
+                if (!intervalId) {
+                    startGeneratingSentences();
+                    disableCheckboxSelection();
+                }
+            }
+        }
+    }
+}
+
+// Function to enable or disable checkbox selection
+function toggleCheckboxSelection(enable) {
+    const checkboxes = logoContainer.querySelectorAll('.checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.disabled = !enable;
+    });
+}
+
+function stopButtonClicked() {
+    if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+    enableCheckboxSelection();
+}
+
+function openModal() {
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+}
+
+function openErrorModal(errorMessage) {
+    document.getElementById('error-message').innerText = errorMessage;
+    errorModal.style.display = 'block';
+}
+
+function closeErrorModal() {
+    errorModal.style.display = 'none';
+}
+
+function openInfoModal() {
+    infoModal.style.display = 'block';
+}
+
+function closeInfoModal() {
+    infoModal.style.display = 'none';
+}
+
+document.getElementById('activate-button').addEventListener('click', () => {
+    if (licenseActivated) {
+        openErrorModal("License already activated.");
+    } else {
+        openModal();
+    }
+});
+
+document.getElementById('info-button').addEventListener('click', () => {
+    openInfoModal();
+});
+
+function checkLicenseKey() {
+    const licenseKey = licenseKeyInput.value;
+    if (licenseKey === 'QPLMNVOWXZ') {
+        const currentDate = new Date();
+        if (currentDate > licenseExpirationDate) {
+            openErrorModal("License has expired.");
+        } else {
+            licenseActivated = true;
+            closeModal();
+            const expirationDate = new Date();
+            expirationDate.setDate(expirationDate.getDate() + 30);
+
+            if (!notificationShown) {
+                alert(`License has been activated. Expiration date: ${expirationDate.toDateString()}`);
+                notificationShown = true;
+            }
+
+            localStorage.setItem('licenseActivated', 'true');
+            localStorage.setItem('licenseExpirationDate', expirationDate.toISOString());
+        }
+    } else {
+        openErrorModal("License key is incorrect.");
+    }
+}
+
+function toggleCheckbox(index) {
+    const checkbox = logoContainer.querySelectorAll('.checkbox')[index];
+    checkbox.checked = !checkbox.checked;
+
+    const checkboxes = logoContainer.querySelectorAll('.checkbox');
+    const atLeastOneChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+    const startButton = document.querySelector('.start-button');
+    startButton.disabled = !atLeastOneChecked;
+}
+
+// Check the stored activation status and expiration date on page load
+window.addEventListener('load', () => {
+    const storedLicenseActivated = localStorage.getItem('licenseActivated');
+    const storedLicenseExpirationDate = localStorage.getItem('licenseExpirationDate');
+    const storedTrialUsed = localStorage.getItem('trialUsed');
+
+    if (storedTrialUsed === 'true') {
+        trialUsed = true;
+    }
+
+    if (storedLicenseActivated === 'true' && storedLicenseExpirationDate) {
+        const expirationDate = new Date(storedLicenseExpirationDate);
+        const currentDate = new Date();
+
+        if (currentDate <= expirationDate) {
+            licenseActivated = true;
+            if (currentDate < expirationDate) {
+                notificationShown = true;
+            }
+        } else {
+            localStorage.removeItem('licenseActivated');
+            localStorage.removeItem('licenseExpirationDate');
+            alert('License has expired. Please activate again.');
+            openModal();
+        }
+    } else if (!trialUsed && !licenseActivated) {
+        alert("You can use the trial version. Please select a blockchain and click Start.");
+    } else if (!licenseActivated) {
+        alert("Trial expired or already used. Please provide a valid license key to continue.");
+        openModal();
+    }
+});
+
+// Prevent default behavior of right-click context menu and text selection
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('selectstart', event => event.preventDefault());
+
+    </script>
+</body>
+</html>
